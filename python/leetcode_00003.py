@@ -27,21 +27,14 @@ def length_of_longest_substring(s):
     :type s: str
     :rtype: int
     """
-    result = 0
-
-    result_pos_begin, result_pos_end = 0, 0
-    char_map = {}
+    result, result_pos_begin, result_pos_end = 0, 0, 0
 
     for ch in s:
-        if ch in char_map.keys():
+        hit_pos = s.find(ch, result_pos_begin, result_pos_end)
+        if -1 != hit_pos:
             result = max(result, result_pos_end - result_pos_begin)
-
-            hit_pos = char_map[ch]
-            for c in s[result_pos_begin:hit_pos]:
-                del char_map[c]
             result_pos_begin = hit_pos + 1
 
-        char_map[ch] = result_pos_end
         result_pos_end += 1
 
     return max(result, result_pos_end - result_pos_begin)
@@ -62,21 +55,14 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        result = 0
-
-        result_pos_begin, result_pos_end = 0, 0
-        char_map = {}
+        result, result_pos_begin, result_pos_end = 0, 0, 0
 
         for ch in s:
-            if ch in char_map.keys():
+            hit_pos = s.find(ch, result_pos_begin, result_pos_end)
+            if -1 != hit_pos:
                 result = max(result, result_pos_end - result_pos_begin)
-
-                hit_pos = char_map[ch]
-                for c in s[result_pos_begin:hit_pos]:
-                    del char_map[c]
                 result_pos_begin = hit_pos + 1
 
-            char_map[ch] = result_pos_end
             result_pos_end += 1
 
         return max(result, result_pos_end - result_pos_begin)
