@@ -51,3 +51,25 @@ assert two_sum([2, 7, 11, 15], 9) == [0, 1]
 assert two_sum([3, 2, 4], 6) == [1, 2]
 
 assert two_sum([3, 3], 6) == [0, 1]
+
+
+###################################################
+# leetcode　提交代码
+class Solution:
+
+    def twoSum(self, nums, target):
+        index = {}
+        for pos in range(len(nums)):
+            if target - nums[pos] in index.keys():
+                return [index[target - nums[pos]], pos]
+            else:
+                index[nums[pos]] = pos
+
+        return []
+
+
+solution = Solution()
+
+assert solution.twoSum([2, 7, 11, 15], 9) == [0, 1]
+assert solution.twoSum([3, 2, 4], 6) == [1, 2]
+assert solution.twoSum([3, 3], 6) == [0, 1]
