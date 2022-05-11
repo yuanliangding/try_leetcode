@@ -106,6 +106,7 @@ class Solution:
                 l2 = l2.next
             l1 = l1.next
             if l1 is None and l2 is not None:
+                result_tail.next = l2
                 l1 = l2
                 l2 = None
 
