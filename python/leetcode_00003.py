@@ -53,6 +53,8 @@ def length_of_longest_substring(s):
 assert length_of_longest_substring("abcabcbb") == 3
 assert length_of_longest_substring("bbbbb") == 1
 assert length_of_longest_substring("pwwkew") == 3
+assert length_of_longest_substring("abba") == 2
+
 
 ###################################################
 # leetcode　提交代码
