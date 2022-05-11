@@ -90,10 +90,11 @@ class Solution:
         result_tail = l1
 
         tmp_node = ListNode(0)
-        zero_node = ListNode(0)
         while l1 is not None:
             result_tail = l1
-            l1.val += l2.val + tmp_node.val
+            l1.val += tmp_node.val
+            if l2 is not None:
+                l1.val += l2.val
 
             if l1.val >= 10:
                 tmp_node.val = l1.val // 10
@@ -101,14 +102,12 @@ class Solution:
             else:
                 tmp_node.val = 0
 
-            if l1.next is None:
-                l1 = l2.next
-                l2 = tmp_node
-            else:
-                l1 = l1.next
+            if l2 is not None:
                 l2 = l2.next
-                if l2 is None:
-                    l2 = zero_node
+            l1 = l1.next
+            if l1 is None and l2 is not None:
+                l1 = l2
+                l2 = None
 
         if tmp_node.val > 0:
             result_tail.next = tmp_node
