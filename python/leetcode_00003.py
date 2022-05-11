@@ -27,7 +27,7 @@ def length_of_longest_substring(s):
     :type s: str
     :rtype: int
     """
-    result = (0, 0)
+    result = 0
 
     result_pos_begin = 0
     result_pos_end = 0
@@ -36,22 +36,18 @@ def length_of_longest_substring(s):
     str_len = len(s)
     for i in range(str_len):
         if s[i] in char_map.keys():
-            if result_pos_end - result_pos_begin > result[1] - result[0]:
-                result = (result_pos_begin, result_pos_end)
+            result_ = result_pos_end - result_pos_begin
+            result = result_ if result_ > result else result
 
             hit_pos = char_map[s[i]]
-            for c in s[result_pos_begin:hit_pos]:
-                char_map.pop(c)
-
+            (char_map.pop(c) for c in s[result_pos_begin:hit_pos])
             result_pos_begin = hit_pos + 1
-            char_map[s[i]] = i
-        else:
-            char_map[s[i]] = i
+
+        char_map[s[i]] = i
         result_pos_end += 1
 
-    if result_pos_end - result_pos_begin > result[1] - result[0]:
-        result = (result_pos_begin, result_pos_end)
-    return result[1] - result[0]
+    result_ = result_pos_end - result_pos_begin
+    return result_ if result_ > result else result
 
 
 assert length_of_longest_substring("abcabcbb") == 3
