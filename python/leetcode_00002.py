@@ -140,3 +140,9 @@ l42 = ListNode(9, ListNode(9, ListNode(9, ListNode(9))))
 sum4 = solution.addTwoNumbers(l41, l42)
 result4 = list_node_to_array(sum4)
 assert result4 == [8, 9, 9, 9, 0, 0, 0, 1]
+
+l51 = ListNode(2, ListNode(4, ListNode(9)))
+l52 = ListNode(5, ListNode(6, ListNode(4, ListNode(9))))
+sum5 = solution.addTwoNumbers(l51, l52)
+result5 = list_node_to_array(sum5)
+assert result5 == [7, 0, 4, 0, 1]
