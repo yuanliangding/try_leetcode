@@ -90,7 +90,8 @@ class Solution:
 
         tmp = 0
         while l1 is not None:
-            l1.val += tmp
+            if tmp > 0:
+                l1.val += tmp
             if l2 is not None:
                 l1.val += l2.val
 
@@ -108,7 +109,8 @@ class Solution:
                     l1.next = l2
                     l2 = None
                 elif tmp > 0:
-                    l1.next = ListNode(0)
+                    l1.next = ListNode(tmp)
+                    tmp = 0
             l1 = l1.next
 
         return result
