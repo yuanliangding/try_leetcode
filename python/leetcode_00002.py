@@ -88,25 +88,29 @@ class Solution:
     def addTwoNumbers(self, l1, l2):
         result = l1
 
+        tmp = 0
         while l1 is not None:
+            if tmp > 0:
+                l1.val += tmp
             if l2 is not None:
                 l1.val += l2.val
-
-            if l2 is not None:
-                l2 = l2.next
-
-            if l1.next is None and l2 is not None:
-                l1.next = l2
-                l2 = None
 
             if l1.val >= 10:
                 tmp = l1.val // 10
                 l1.val %= 10
-                if l1.next is None:
-                    l1.next = ListNode(tmp)
-                else:
-                    l1.next.val += tmp
+            else:
+                tmp = 0
 
+            if l2 is not None:
+                l2 = l2.next
+
+            if l1.next is None:
+                if l2 is not None:
+                    l1.next = l2
+                    l2 = None
+                elif tmp > 0:
+                    l1.next = ListNode(tmp)
+                    tmp = 0
             l1 = l1.next
 
         return result
