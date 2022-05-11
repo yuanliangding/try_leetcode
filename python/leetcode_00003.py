@@ -33,18 +33,18 @@ def length_of_longest_substring(s):
     result_pos_end = 0
     char_map = {}
 
-    str_len = len(s)
-    for i in range(str_len):
-        if s[i] in char_map.keys():
+    for ch in s:
+        if ch in char_map.keys():
             result_ = result_pos_end - result_pos_begin
-            result = result_ if result_ > result else result
+            if result_ > result:
+                result = result_
 
-            hit_pos = char_map[s[i]]
+            hit_pos = char_map[ch]
             for c in s[result_pos_begin:hit_pos]:
-                char_map.pop(c)
+                del char_map[c]
             result_pos_begin = hit_pos + 1
 
-        char_map[s[i]] = i
+        char_map[ch] = result_pos_end
         result_pos_end += 1
 
     result_ = result_pos_end - result_pos_begin
@@ -72,18 +72,18 @@ class Solution(object):
         result_pos_end = 0
         char_map = {}
 
-        str_len = len(s)
-        for i in range(str_len):
-            if s[i] in char_map.keys():
+        for ch in s:
+            if ch in char_map.keys():
                 result_ = result_pos_end - result_pos_begin
-                result = result_ if result_ > result else result
+                if result_ > result:
+                    result = result_
 
-                hit_pos = char_map[s[i]]
+                hit_pos = char_map[ch]
                 for c in s[result_pos_begin:hit_pos]:
-                    char_map.pop(c)
+                    del char_map[c]
                 result_pos_begin = hit_pos + 1
 
-            char_map[s[i]] = i
+            char_map[ch] = result_pos_end
             result_pos_end += 1
 
         result_ = result_pos_end - result_pos_begin
