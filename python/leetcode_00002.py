@@ -87,11 +87,9 @@ class Solution:
 
     def addTwoNumbers(self, l1, l2):
         result = l1
-        result_tail = l1
 
         tmp = 0
         while l1 is not None:
-            result_tail = l1
             l1.val += tmp
             if l2 is not None:
                 l1.val += l2.val
@@ -104,14 +102,14 @@ class Solution:
 
             if l2 is not None:
                 l2 = l2.next
-            l1 = l1.next
-            if l1 is None and l2 is not None:
-                result_tail.next = l2
-                l1 = l2
-                l2 = None
 
-        if tmp > 0:
-            result_tail.next = ListNode(tmp)
+            if l1.next is None:
+                if l2 is not None:
+                    l1.next = l2
+                    l2 = None
+                elif tmp > 0:
+                    l1.next = ListNode(0)
+            l1 = l1.next
 
         return result
 
