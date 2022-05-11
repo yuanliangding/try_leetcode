@@ -64,3 +64,80 @@ assert add_two_numbers([2, 4, 3], [5, 6, 4]) == [7, 0, 8]
 assert add_two_numbers([0], [0]) == [0]
 
 assert add_two_numbers([9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9]) == [8, 9, 9, 9, 0, 0, 0, 1]
+
+
+###################################################
+class ListNode:
+
+    def __init__(self, val, next_=None):
+        self.val = val
+        self.next = next_
+
+
+def list_node_to_array(node_list):
+    result = []
+    while node_list is not None:
+        result.append(node_list.val)
+        node_list = node_list.next
+    return result
+
+
+# leetcode　提交代码
+class Solution:
+
+    def addTwoNumbers(self, l1, l2):
+        result = l1
+        result_tail = l1
+
+        tmp_node = ListNode(0)
+        zero_node = ListNode(0)
+        while l1 is not None:
+            result_tail = l1
+            l1.val += l2.val + tmp_node.val
+
+            if l1.val >= 10:
+                tmp_node.val = l1.val // 10
+                l1.val %= 10
+            else:
+                tmp_node.val = 0
+
+            if l1.next is None:
+                l1 = l2.next
+                l2 = tmp_node
+            else:
+                l1 = l1.next
+                l2 = l2.next
+                if l2 is None:
+                    l2 = zero_node
+
+        if tmp_node.val > 0:
+            result_tail.next = tmp_node
+
+        return result
+
+
+solution = Solution()
+
+l11 = ListNode(2, ListNode(4, ListNode(3)))
+l12 = ListNode(5, ListNode(6, ListNode(4)))
+sum1 = solution.addTwoNumbers(l11, l12)
+result1 = list_node_to_array(sum1)
+assert result1 == [7, 0, 8]
+
+l21 = ListNode(0)
+l22 = ListNode(0)
+sum2 = solution.addTwoNumbers(l21, l22)
+result2 = list_node_to_array(sum2)
+assert result2 == [0]
+
+l31 = ListNode(9, ListNode(9))
+l32 = ListNode(9)
+sum3 = solution.addTwoNumbers(l31, l32)
+result3 = list_node_to_array(sum3)
+assert result3 == [8, 0, 1]
+
+l41 = ListNode(9, ListNode(9, ListNode(9, ListNode(9, ListNode(9, ListNode(9, ListNode(9)))))))
+l42 = ListNode(9, ListNode(9, ListNode(9, ListNode(9))))
+sum4 = solution.addTwoNumbers(l41, l42)
+result4 = list_node_to_array(sum4)
+assert result4 == [8, 9, 9, 9, 0, 0, 0, 1]
