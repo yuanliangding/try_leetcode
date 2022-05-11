@@ -40,7 +40,8 @@ def length_of_longest_substring(s):
             result = result_ if result_ > result else result
 
             hit_pos = char_map[s[i]]
-            (char_map.pop(c) for c in s[result_pos_begin:hit_pos])
+            for c in s[result_pos_begin:hit_pos]:
+                char_map.pop(c)
             result_pos_begin = hit_pos + 1
 
         char_map[s[i]] = i
@@ -78,7 +79,8 @@ class Solution(object):
                 result = result_ if result_ > result else result
 
                 hit_pos = char_map[s[i]]
-                (char_map.pop(c) for c in s[result_pos_begin:hit_pos])
+                for c in s[result_pos_begin:hit_pos]:
+                    char_map.pop(c)
                 result_pos_begin = hit_pos + 1
 
             char_map[s[i]] = i
@@ -92,3 +94,4 @@ solution = Solution()
 assert solution.lengthOfLongestSubstring("abcabcbb") == 3
 assert solution.lengthOfLongestSubstring("bbbbb") == 1
 assert solution.lengthOfLongestSubstring("pwwkew") == 3
+assert solution.lengthOfLongestSubstring("abba") == 2
