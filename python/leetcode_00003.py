@@ -29,15 +29,12 @@ def length_of_longest_substring(s):
     """
     result = 0
 
-    result_pos_begin = 0
-    result_pos_end = 0
+    result_pos_begin, result_pos_end = 0, 0
     char_map = {}
 
     for ch in s:
         if ch in char_map.keys():
-            result_ = result_pos_end - result_pos_begin
-            if result_ > result:
-                result = result_
+            result = max(result, result_pos_end - result_pos_begin)
 
             hit_pos = char_map[ch]
             for c in s[result_pos_begin:hit_pos]:
@@ -47,8 +44,7 @@ def length_of_longest_substring(s):
         char_map[ch] = result_pos_end
         result_pos_end += 1
 
-    result_ = result_pos_end - result_pos_begin
-    return result_ if result_ > result else result
+    return max(result, result_pos_end - result_pos_begin)
 
 
 assert length_of_longest_substring("abcabcbb") == 3
@@ -68,15 +64,12 @@ class Solution(object):
         """
         result = 0
 
-        result_pos_begin = 0
-        result_pos_end = 0
+        result_pos_begin, result_pos_end = 0, 0
         char_map = {}
 
         for ch in s:
             if ch in char_map.keys():
-                result_ = result_pos_end - result_pos_begin
-                if result_ > result:
-                    result = result_
+                result = max(result, result_pos_end - result_pos_begin)
 
                 hit_pos = char_map[ch]
                 for c in s[result_pos_begin:hit_pos]:
@@ -86,8 +79,8 @@ class Solution(object):
             char_map[ch] = result_pos_end
             result_pos_end += 1
 
-        result_ = result_pos_end - result_pos_begin
-        return result_ if result_ > result else result
+        return max(result, result_pos_end - result_pos_begin)
+
 
 solution = Solution()
 
