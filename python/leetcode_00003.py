@@ -53,3 +53,40 @@ def length_of_longest_substring(s):
 assert length_of_longest_substring("abcabcbb") == 3
 assert length_of_longest_substring("bbbbb") == 1
 assert length_of_longest_substring("pwwkew") == 3
+
+###################################################
+# leetcode　提交代码
+class Solution(object):
+
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        result = 0
+
+        result_pos_begin = 0
+        result_pos_end = 0
+        char_map = {}
+
+        str_len = len(s)
+        for i in range(str_len):
+            if s[i] in char_map.keys():
+                result_ = result_pos_end - result_pos_begin
+                result = result_ if result_ > result else result
+
+                hit_pos = char_map[s[i]]
+                (char_map.pop(c) for c in s[result_pos_begin:hit_pos])
+                result_pos_begin = hit_pos + 1
+
+            char_map[s[i]] = i
+            result_pos_end += 1
+
+        result_ = result_pos_end - result_pos_begin
+        return result_ if result_ > result else result
+
+solution = Solution()
+
+assert solution.lengthOfLongestSubstring("abcabcbb") == 3
+assert solution.lengthOfLongestSubstring("bbbbb") == 1
+assert solution.lengthOfLongestSubstring("pwwkew") == 3
